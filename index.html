@@ -1,0 +1,719 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nubi: lembretes, tarefas e notas no topo da tela do seu PC</title>
+    <meta
+      name="description"
+      content="O Nubi é um robozinho que mora no topo da tela do Windows. Escreva do seu jeito e ele cuida de lembretes, alarmes, timers, tarefas, notas e memória. Sem conta, dados no seu PC, pagamento único."
+    />
+    <meta name="theme-color" content="#0a0e1c" />
+    <link rel="canonical" href="https://luccas-souza7.github.io/nubi/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Nubi" />
+    <meta property="og:url" content="https://luccas-souza7.github.io/nubi/" />
+    <meta property="og:title" content="Nubi: o robozinho que organiza seu dia" />
+    <meta
+      property="og:description"
+      content="Lembretes, timers, tarefas e notas no topo da tela do Windows. Escreva do seu jeito. Pagamento único."
+    />
+    <meta property="og:image" content="https://luccas-souza7.github.io/nubi/assets/icone.png" />
+    <meta property="og:image:alt" content="O Telinha, robozinho do Nubi" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/icone.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Nunito:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="config.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="top" id="topo">
+      <div class="wrap top-in">
+        <a class="brand" href="#conteudo" aria-label="Nubi, início">
+          <img src="assets/favicon.png" alt="" width="28" height="28" />
+          <span>Nubi</span>
+        </a>
+        <nav class="nav" aria-label="Seções">
+          <a href="#funcoes">Funções</a>
+          <a href="#ia">IA grátis</a>
+          <a href="#instalar">Instalar</a>
+          <a href="#preco">Preço</a>
+          <a href="#duvidas">Dúvidas</a>
+        </nav>
+        <a class="btn btn-primary btn-sm" data-buy href="#preco">Comprar</a>
+      </div>
+    </header>
+
+    <main id="conteudo">
+      <!-- ============ HERO ============ -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">
+              <svg class="i" aria-hidden="true"><use href="icons.svg#monitor" /></svg>
+              Assistente para Windows 10 e 11
+            </p>
+            <h1 id="hero-title">Escreva do seu jeito. <span class="glow-text">O Nubi lembra por você.</span></h1>
+            <p class="lead">
+              Um robozinho que mora numa pílula discreta no topo da tela. Passe o mouse, escreva
+              <q>me lembra de pagar o boleto às 15h</q> e pronto: na hora certa, ele avisa e fala em voz alta.
+            </p>
+            <div class="hero-cta">
+              <a class="btn btn-primary btn-lg" data-buy href="#preco">
+                Comprar por <span data-price>R$ 47</span>
+                <svg class="i" aria-hidden="true"><use href="icons.svg#arrow-right" /></svg>
+              </a>
+              <a class="btn btn-ghost btn-lg" href="#funcoes">Ver o que ele faz</a>
+            </div>
+            <ul class="hero-facts">
+              <li><svg class="i" aria-hidden="true"><use href="icons.svg#receipt" /></svg>Pagamento único</li>
+              <li><svg class="i" aria-hidden="true"><use href="icons.svg#user-round-x" /></svg>Sem conta e sem login</li>
+              <li><svg class="i" aria-hidden="true"><use href="icons.svg#refresh-cw" /></svg>Atualizações incluídas</li>
+            </ul>
+          </div>
+
+          <div class="hero-stage">
+            <div class="stage" id="demo">
+              <div class="monitor">
+                <span class="cam" aria-hidden="true"></span>
+                <div class="screen" id="screen">
+                  <div class="wall" aria-hidden="true"></div>
+                  <div class="desk-window" aria-hidden="true">
+                    <div class="dw-bar"><i></i><i></i><i></i></div>
+                    <div class="dw-body"><b></b><b></b><b></b><b class="short"></b></div>
+                  </div>
+                  <div class="app-window" id="app-window" aria-hidden="true">
+                    <div class="aw-bar">
+                      <svg class="i" aria-hidden="true"><use href="icons.svg#globe" /></svg>
+                      <span id="app-title">YouTube</span>
+                    </div>
+                    <div class="aw-body"><b></b><b></b><b></b></div>
+                  </div>
+
+                  <div class="notch" id="notch">
+                    <button class="pill" id="pill" type="button" aria-expanded="false" aria-controls="panel">
+                      <img src="assets/robo/tela-neutro.svg" alt="" width="26" height="26" id="pill-face" />
+                      <span id="pill-text" class="mono">--:--</span>
+                      <span class="sr-only">Abrir o painel do Nubi</span>
+                    </button>
+                    <div class="panel" id="panel" role="group" aria-label="Painel do Nubi (demonstração)">
+                      <div class="panel-head">
+                        <img src="assets/robo/tela-feliz.svg" alt="Telinha, feliz" id="face" width="56" height="56" />
+                        <p class="bubble" id="bubble" aria-live="polite">Oi! Eu sou o Nubi. Escreve aqui embaixo.</p>
+                      </div>
+                      <form class="cmd" id="cmd" autocomplete="off">
+                        <label class="sr-only" for="cmd-input">Escreva um comando para o Nubi</label>
+                        <input id="cmd-input" type="text" enterkeyhint="send" placeholder="Escreva um comando…" maxlength="120" />
+                        <button type="submit" class="cmd-send" aria-label="Enviar comando">
+                          <svg class="i" aria-hidden="true"><use href="icons.svg#corner-down-left" /></svg>
+                        </button>
+                      </form>
+                      <div class="tabs" role="tablist" aria-label="Listas">
+                        <button role="tab" type="button" id="tab-lembretes" aria-selected="true" data-tab="lembretes">
+                          Lembretes <span class="count" data-count="lembretes">0</span>
+                        </button>
+                        <button role="tab" type="button" id="tab-tarefas" aria-selected="false" tabindex="-1" data-tab="tarefas">
+                          Tarefas <span class="count" data-count="tarefas">0</span>
+                        </button>
+                        <button role="tab" type="button" id="tab-notas" aria-selected="false" tabindex="-1" data-tab="notas">
+                          Notas <span class="count" data-count="notas">0</span>
+                        </button>
+                      </div>
+                      <ul class="list" id="list" role="tabpanel" aria-labelledby="tab-lembretes"></ul>
+                    </div>
+                  </div>
+
+                  <div class="toast" id="toast" role="status" aria-live="polite">
+                    <img src="assets/robo/tela-falando.svg" alt="" width="40" height="40" />
+                    <div>
+                      <p class="toast-app"><span>Nubi</span><span id="toast-when" class="mono">agora</span></p>
+                      <p class="toast-title" id="toast-title">Pagar o boleto</p>
+                      <p class="toast-voice">
+                        <svg class="i" aria-hidden="true"><use href="icons.svg#volume-2" /></svg>
+                        <span id="toast-voice">falando em voz alta</span>
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="taskbar" aria-hidden="true">
+                    <span class="tb-icons"><i></i><i></i><i></i><i></i><i></i></span>
+                    <span class="tb-clock mono" id="tb-clock">--:--</span>
+                  </div>
+                  <div class="screen-off" aria-hidden="true"></div>
+                </div>
+                <span class="power" aria-hidden="true"></span>
+              </div>
+              <img class="hero-bot" id="hero-bot" src="assets/robo/tela-sono.svg" alt="" width="160" height="160" />
+              <div class="neck" aria-hidden="true"></div>
+              <div class="foot" aria-hidden="true"></div>
+              <p class="hint" id="hint">
+                <svg class="i" aria-hidden="true"><use href="icons.svg#mouse-pointer-click" /></svg>
+                <span>Passe o mouse ou toque na pílula</span>
+              </p>
+            </div>
+
+            <div class="try">
+              <p class="try-label" id="try-label">Experimente:</p>
+              <div class="chips" role="group" aria-labelledby="try-label">
+                <button type="button" class="chip" data-say="timer de 1 minuto">
+                  <svg class="i" aria-hidden="true"><use href="icons.svg#timer" /></svg>timer de 1 minuto
+                </button>
+                <button type="button" class="chip" data-say="me lembra de beber água em 20 minutos">
+                  <svg class="i" aria-hidden="true"><use href="icons.svg#bell" /></svg>beber água em 20 min
+                </button>
+                <button type="button" class="chip" data-say="nova tarefa: responder o cliente">
+                  <svg class="i" aria-hidden="true"><use href="icons.svg#list-checks" /></svg>nova tarefa
+                </button>
+                <button type="button" class="chip" data-say="lembra que meu café é sem açúcar">
+                  <svg class="i" aria-hidden="true"><use href="icons.svg#brain" /></svg>lembra que…
+                </button>
+                <button type="button" class="chip" data-say="abre o YouTube">
+                  <svg class="i" aria-hidden="true"><use href="icons.svg#app-window" /></svg>abre o YouTube
+                </button>
+                <button type="button" class="chip" data-say="que horas são?">
+                  <svg class="i" aria-hidden="true"><use href="icons.svg#clock" /></svg>que horas são?
+                </button>
+              </div>
+              <p class="try-note">Demonstração no navegador. Ou escreva o seu próprio comando dentro do painel.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FALE DO SEU JEITO ============ -->
+      <section class="section" id="fale" aria-labelledby="fale-title">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="kicker">Português de verdade</p>
+            <h2 id="fale-title">Fale do seu jeito. Ele entende.</h2>
+            <p>
+              Nada de comando decorado. Horário por extenso, <q>em 20 minutos</q>, <q>amanhã às sete e meia</q>: o Nubi
+              entende. Toque numa frase para ver a resposta na tela lá de cima.
+            </p>
+          </header>
+          <div class="phrase-groups">
+            <div class="phrase-group">
+              <h3><svg class="i" aria-hidden="true"><use href="icons.svg#calendar-clock" /></svg>Lembretes e tempo</h3>
+              <ul class="phrases">
+                <li><button type="button" class="phrase" data-say="me lembra de pagar o boleto às 15h">me lembra de pagar o boleto às 15h</button></li>
+                <li><button type="button" class="phrase" data-say="me lembra de tirar o bolo do forno em 40 minutos">me lembra de tirar o bolo do forno em 40 minutos</button></li>
+                <li><button type="button" class="phrase" data-say="me acorda amanhã às sete e meia">me acorda amanhã às sete e meia</button></li>
+                <li><button type="button" class="phrase" data-say="timer de 25 minutos">timer de 25 minutos</button></li>
+              </ul>
+            </div>
+            <div class="phrase-group">
+              <h3><svg class="i" aria-hidden="true"><use href="icons.svg#list-checks" /></svg>Organização</h3>
+              <ul class="phrases">
+                <li><button type="button" class="phrase" data-say="nova tarefa: responder o cliente">nova tarefa: responder o cliente</button></li>
+                <li><button type="button" class="phrase" data-say="anota: comprar pão e leite">anota: comprar pão e leite</button></li>
+                <li><button type="button" class="phrase" data-say="lembra que meu café é sem açúcar">lembra que meu café é sem açúcar</button></li>
+                <li><button type="button" class="phrase" data-say="quais são meus lembretes?">quais são meus lembretes?</button></li>
+              </ul>
+            </div>
+            <div class="phrase-group">
+              <h3><svg class="i" aria-hidden="true"><use href="icons.svg#zap" /></svg>Atalhos</h3>
+              <ul class="phrases">
+                <li><button type="button" class="phrase" data-say="abre a calculadora">abre a calculadora</button></li>
+                <li><button type="button" class="phrase" data-say="pesquisa receita de pão de queijo">pesquisa receita de pão de queijo</button></li>
+                <li><button type="button" class="phrase" data-say="procura no youtube aula de violão">procura no youtube aula de violão</button></li>
+                <li><button type="button" class="phrase" data-say="que dia é hoje?">que dia é hoje?</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FUNÇÕES ============ -->
+      <section class="section" id="funcoes" aria-labelledby="funcoes-title">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="kicker">Funções</p>
+            <h2 id="funcoes-title">Tudo à mão, sem abrir janela nenhuma</h2>
+            <p>
+              Recolhido, o Nubi é só uma pílula com a hora, o próximo lembrete ou o timer correndo. Passe o mouse e o painel
+              abre na hora, com as abas Lembretes, Tarefas e Notas.
+            </p>
+          </header>
+          <div class="features">
+            <article class="feature feature-wide">
+              <span class="f-icon"><svg class="i" aria-hidden="true"><use href="icons.svg#bell" /></svg></span>
+              <h3>Lembretes que avisam de verdade</h3>
+              <p>
+                <q>Às 15h</q>, <q>em 10 minutos</q>, <q>amanhã às 8</q>. Na hora certa sai uma notificação do Windows e o
+                Nubi fala o aviso em voz alta, com a voz do próprio Windows.
+              </p>
+              <button type="button" class="btn btn-ghost btn-sm" id="speak" hidden>
+                <svg class="i" aria-hidden="true"><use href="icons.svg#volume-2" /></svg>Ouvir um exemplo
+              </button>
+              <div class="mini-toast" aria-hidden="true">
+                <img src="assets/robo/tela-falando.svg" alt="" width="44" height="44" loading="lazy" />
+                <div>
+                  <p><strong>Nubi</strong> · Hora de pagar o boleto!</p>
+                  <small><svg class="i"><use href="icons.svg#volume-2" /></svg>falando em voz alta</small>
+                </div>
+              </div>
+            </article>
+            <article class="feature">
+              <span class="f-icon"><svg class="i" aria-hidden="true"><use href="icons.svg#alarm-clock" /></svg></span>
+              <h3>Alarmes</h3>
+              <p><q>Me acorda amanhã às sete e meia</q> e está marcado.</p>
+            </article>
+            <article class="feature">
+              <span class="f-icon"><svg class="i" aria-hidden="true"><use href="icons.svg#timer" /></svg></span>
+              <h3>Timers</h3>
+              <p>Contagem regressiva visível na pílula. Para a cozinha, o estudo ou a pausa do café.</p>
+            </article>
+            <article class="feature">
+              <span class="f-icon"><svg class="i" aria-hidden="true"><use href="icons.svg#list-checks" /></svg></span>
+              <h3>Tarefas</h3>
+              <p>Anote na hora e marque como feita, sem trocar de janela.</p>
+            </article>
+            <article class="feature">
+              <span class="f-icon"><svg class="i" aria-hidden="true"><use href="icons.svg#sticky-note" /></svg></span>
+              <h3>Notas</h3>
+              <p>Aquela informação rápida: lista do mercado, um telefone, uma ideia.</p>
+            </article>
+            <article class="feature">
+              <span class="f-icon"><svg class="i" aria-hidden="true"><use href="icons.svg#brain" /></svg></span>
+              <h3>Memória</h3>
+              <p><q>Lembra que meu café é sem açúcar.</q> Ele guarda e responde quando você perguntar.</p>
+            </article>
+            <article class="feature">
+              <span class="f-icon"><svg class="i" aria-hidden="true"><use href="icons.svg#app-window" /></svg></span>
+              <h3>Abre sites e apps</h3>
+              <p><q>Abre o YouTube</q>, <q>abre a calculadora</q>. É só pedir.</p>
+            </article>
+            <article class="feature">
+              <span class="f-icon"><svg class="i" aria-hidden="true"><use href="icons.svg#search" /></svg></span>
+              <h3>Pesquisa</h3>
+              <p>No Google ou no YouTube, direto do topo da tela.</p>
+            </article>
+            <article class="feature">
+              <span class="f-icon"><svg class="i" aria-hidden="true"><use href="icons.svg#clock" /></svg></span>
+              <h3>Hora e data</h3>
+              <p><q>Que horas são?</q>, <q>que dia é hoje?</q> Resposta na hora.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ IA GRÁTIS ============ -->
+      <section class="section section-alt" id="ia" aria-labelledby="ia-title">
+        <div class="wrap">
+          <div class="ia-grid">
+            <header class="section-head section-head-left">
+              <p class="kicker">Conversa livre</p>
+              <h2 id="ia-title">IA grátis, explicada sem enrolação</h2>
+              <p>
+                Além dos comandos, dá para conversar com o Nubi sobre qualquer assunto. Para isso ele usa uma IA, e você
+                não precisa pagar nada por ela.
+              </p>
+              <ul class="ticks">
+                <li>
+                  <svg class="i" aria-hidden="true"><use href="icons.svg#check" /></svg>
+                  <span><strong>É opcional.</strong> Lembretes, tarefas, notas e memória funcionam sem IA nenhuma.</span>
+                </li>
+                <li>
+                  <svg class="i" aria-hidden="true"><use href="icons.svg#check" /></svg>
+                  <span>
+                    <strong>Um botão e pronto.</strong> Na primeira abertura, escolha <q>IA grátis no seu computador</q>: o
+                    Nubi baixa e instala tudo sozinho (usa o Ollama, gratuito), sem cadastro e sem chave.
+                  </span>
+                </li>
+                <li>
+                  <svg class="i" aria-hidden="true"><use href="icons.svg#check" /></svg>
+                  <span>
+                    <strong>Ou pela internet.</strong> Prefere não instalar nada? Use o Groq, o Gemini ou o OpenRouter com
+                    uma chave grátis. A tela de boas-vindas mostra o passo a passo e os prós e contras de cada um.
+                  </span>
+                </li>
+                <li>
+                  <svg class="i" aria-hidden="true"><use href="icons.svg#check" /></svg>
+                  <span>
+                    <strong>Modo automático.</strong> O Nubi tenta uma IA atrás da outra. Quando uma bate no limite grátis
+                    do dia, ele passa para a próxima, sem você fazer nada.
+                  </span>
+                </li>
+              </ul>
+            </header>
+
+            <div class="relay" aria-hidden="true">
+              <div class="relay-bot"><img src="assets/robo/tela-pensando.svg" alt="" width="88" height="88" loading="lazy" /></div>
+              <div class="relay-line">
+                <span class="relay-node n1">Ollama</span>
+                <span class="relay-node n2">Groq</span>
+                <span class="relay-node n3">Gemini</span>
+              </div>
+              <p class="relay-cap mono">limite do dia? passa para a próxima</p>
+            </div>
+          </div>
+
+          <div class="ai-cards">
+            <article class="ai-card ai-card-main">
+              <h3><svg class="i" aria-hidden="true"><use href="icons.svg#cpu" /></svg>No seu PC</h3>
+              <p class="ai-tag">Recomendado · um botão · sem chave</p>
+              <p><strong>Bom:</strong> instala sozinho, sem limite diário, e a conversa não sai do seu computador.</p>
+              <p><strong>Atenção:</strong> o download é grande e o PC precisa de pelo menos 4 GB de memória.</p>
+            </article>
+            <article class="ai-card">
+              <h3><svg class="i" aria-hidden="true"><use href="icons.svg#zap" /></svg>Groq</h3>
+              <p class="ai-tag">Pela internet · chave grátis</p>
+              <p><strong>Bom:</strong> respostas muito rápidas.</p>
+              <p><strong>Atenção:</strong> tem limite de uso por dia e precisa de internet.</p>
+            </article>
+            <article class="ai-card">
+              <h3><svg class="i" aria-hidden="true"><use href="icons.svg#sparkles" /></svg>Gemini</h3>
+              <p class="ai-tag">Pela internet · chave grátis</p>
+              <p><strong>Bom:</strong> vai bem em português.</p>
+              <p><strong>Atenção:</strong> precisa de uma conta Google para criar a chave e tem limite diário.</p>
+            </article>
+            <article class="ai-card">
+              <h3><svg class="i" aria-hidden="true"><use href="icons.svg#shuffle" /></svg>OpenRouter</h3>
+              <p class="ai-tag">Pela internet · chave grátis</p>
+              <p><strong>Bom:</strong> uma chave só dá acesso a vários modelos gratuitos.</p>
+              <p><strong>Atenção:</strong> os modelos grátis podem ficar lentos em horário de pico.</p>
+            </article>
+          </div>
+          <p class="fineprint">
+            <svg class="i" aria-hidden="true"><use href="icons.svg#info" /></svg>
+            Os limites dos planos gratuitos são definidos por cada empresa e podem mudar. Nas opções online, o que você
+            conversa com a IA passa pelo serviço escolhido. Com a IA no seu PC, nada sai do computador.
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ PERSONALIZAÇÃO ============ -->
+      <section class="section" id="visual" aria-labelledby="visual-title">
+        <div class="wrap looks">
+          <div class="looks-stage" id="looks-stage" data-glow="azul">
+            <img src="assets/robo/tela-cor-azul.svg" alt="Telinha com luzes azuis" id="looks-img" width="240" height="240" loading="lazy" />
+          </div>
+          <div class="looks-copy">
+            <header class="section-head section-head-left">
+              <p class="kicker">Personalização</p>
+              <h2 id="visual-title">Um Telinha com a sua cara</h2>
+              <p>Escolha a cor das luzes de LED e um acessório. Ele aparece assim na pílula e no painel.</p>
+            </header>
+            <fieldset class="looks-set">
+              <legend>Cor das luzes</legend>
+              <div class="swatches">
+                <button type="button" class="swatch" data-look="cor-azul" data-glow="azul" aria-pressed="true">
+                  <span style="--c: #5cd6ff"></span>Azul
+                </button>
+                <button type="button" class="swatch" data-look="cor-menta" data-glow="menta" aria-pressed="false">
+                  <span style="--c: #5ef2b8"></span>Menta
+                </button>
+                <button type="button" class="swatch" data-look="cor-amarelo" data-glow="amarelo" aria-pressed="false">
+                  <span style="--c: #ffd45c"></span>Amarelo
+                </button>
+                <button type="button" class="swatch" data-look="cor-rosa" data-glow="rosa" aria-pressed="false">
+                  <span style="--c: #ff8fc7"></span>Rosa
+                </button>
+              </div>
+            </fieldset>
+            <fieldset class="looks-set">
+              <legend>Acessório</legend>
+              <div class="swatches">
+                <button type="button" class="swatch" data-look="acessorio-laco" data-glow="azul" aria-pressed="false">Laço</button>
+                <button type="button" class="swatch" data-look="acessorio-oculos" data-glow="azul" aria-pressed="false">Óculos</button>
+                <button type="button" class="swatch" data-look="acessorio-chapeu" data-glow="azul" aria-pressed="false">Chapéu</button>
+              </div>
+            </fieldset>
+            <p class="looks-note">No app, você combina a cor e o acessório nos Ajustes.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MAIS RECURSOS ============ -->
+      <section class="section" id="mais" aria-labelledby="mais-title">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="kicker">E tem mais</p>
+            <h2 id="mais-title">No celular, com o seu tema e a sua voz</h2>
+            <p>Detalhes que fazem o Nubi encaixar na sua rotina. Tudo isso fica nos Ajustes.</p>
+          </header>
+          <div class="features">
+            <article class="feature">
+              <span class="f-icon"><svg class="i" aria-hidden="true"><use href="icons.svg#smartphone" /></svg></span>
+              <h3>No celular por QR Code</h3>
+              <p>
+                Aponte a câmera do celular (Android ou iPhone) para o QR Code e use o Nubi por ele, no mesmo Wi-Fi do PC.
+                Com o app gratuito ntfy, os lembretes também chegam no celular.
+              </p>
+            </article>
+            <article class="feature">
+              <span class="f-icon"><svg class="i" aria-hidden="true"><use href="icons.svg#sun-moon" /></svg></span>
+              <h3>Tema claro e escuro</h3>
+              <p>Igual ao Windows ou do jeito que você preferir.</p>
+            </article>
+            <article class="feature">
+              <span class="f-icon"><svg class="i" aria-hidden="true"><use href="icons.svg#audio-lines" /></svg></span>
+              <h3>Voz do seu jeito</h3>
+              <p>
+                Escolha uma voz do Windows e um estilo: Natural, Robô, Animado ou Calmo. Prefere silêncio? Ele só executa,
+                sem falar.
+              </p>
+            </article>
+            <article class="feature">
+              <span class="f-icon"><svg class="i" aria-hidden="true"><use href="icons.svg#save" /></svg></span>
+              <h3>Backup</h3>
+              <p>Salve um backup dos seus lembretes, tarefas e notas e leve tudo para outro computador.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PRIVACIDADE ============ -->
+      <section class="section section-alt" id="privacidade" aria-labelledby="priv-title">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="kicker">Privacidade</p>
+            <h2 id="priv-title">Seus dados ficam no seu PC</h2>
+            <p>O Nubi não tem conta, não tem login e não guarda suas coisas em servidor nenhum.</p>
+          </header>
+          <div class="privacy">
+            <div class="priv-item">
+              <svg class="i" aria-hidden="true"><use href="icons.svg#user-round-x" /></svg>
+              <h3>Sem conta e sem login</h3>
+              <p>Você ativa uma vez com o e-mail da compra e a chave. Não tem cadastro nem senha.</p>
+            </div>
+            <div class="priv-item">
+              <svg class="i" aria-hidden="true"><use href="icons.svg#hard-drive" /></svg>
+              <h3>Tudo salvo no computador</h3>
+              <p>Lembretes, tarefas, notas e memória ficam guardados no seu PC.</p>
+            </div>
+            <div class="priv-item">
+              <svg class="i" aria-hidden="true"><use href="icons.svg#wifi-off" /></svg>
+              <h3>Funciona sem internet</h3>
+              <p>Lembretes, timers, tarefas, notas e memória não dependem de conexão.</p>
+            </div>
+            <div class="priv-item">
+              <svg class="i" aria-hidden="true"><use href="icons.svg#globe" /></svg>
+              <h3>Internet só quando você pede</h3>
+              <p>Para abrir sites, pesquisar, buscar atualizações e, se você ligar, conversar com uma IA online ou receber lembretes no celular.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ INSTALAR ============ -->
+      <section class="section" id="instalar" aria-labelledby="inst-title">
+        <div class="wrap">
+          <header class="section-head">
+            <p class="kicker">Instalação</p>
+            <h2 id="inst-title">Pronto em 3 passos</h2>
+            <p>Leva uns dois minutos. Funciona no Windows 10 e 11, 64 bits.</p>
+          </header>
+          <ol class="steps">
+            <li class="step">
+              <span class="step-n mono">1</span>
+              <svg class="i step-i" aria-hidden="true"><use href="icons.svg#credit-card" /></svg>
+              <h3>Compre</h3>
+              <p>Pagamento único pela Cakto, no Pix ou no cartão. A chave de ativação chega no seu e-mail.</p>
+            </li>
+            <li class="step">
+              <span class="step-n mono">2</span>
+              <svg class="i step-i" aria-hidden="true"><use href="icons.svg#download" /></svg>
+              <h3>Baixe</h3>
+              <p>
+                Na página de confirmação, escolha o instalador (recomendado) ou a versão portátil, que nem precisa instalar.
+                Depois, as atualizações chegam sozinhas.
+              </p>
+            </li>
+            <li class="step">
+              <span class="step-n mono">3</span>
+              <svg class="i step-i" aria-hidden="true"><use href="icons.svg#key-round" /></svg>
+              <h3>Ative</h3>
+              <p>Na primeira abertura, informe o e-mail da compra e a chave. Pronto: o Nubi aparece no topo da tela.</p>
+            </li>
+          </ol>
+
+          <div class="smart">
+            <div class="smart-copy">
+              <h3><svg class="i" aria-hidden="true"><use href="icons.svg#triangle-alert" /></svg>Apareceu um aviso azul do Windows?</h3>
+              <p>
+                É normal. O Windows mostra <q>O Windows protegeu o computador</q> para apps novos, que ainda não são
+                conhecidos por ele. Clique em <strong>Mais informações</strong> e depois em
+                <strong>Executar assim mesmo</strong>.
+              </p>
+            </div>
+            <div class="smart-mock" aria-hidden="true">
+              <p class="sm-title">O Windows protegeu o computador</p>
+              <p class="sm-text">O SmartScreen impediu a inicialização de um aplicativo não reconhecido…</p>
+              <p class="sm-link"><span>Mais informações</span><svg class="i"><use href="icons.svg#mouse-pointer-click" /></svg></p>
+              <div class="sm-btns"><span class="sm-run">Executar assim mesmo</span><span>Não executar</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PREÇO ============ -->
+      <section class="section" id="preco" aria-labelledby="preco-title">
+        <div class="wrap">
+          <div class="price">
+            <div class="price-side">
+              <img src="assets/robo/tela-animado.svg" alt="" width="140" height="140" loading="lazy" />
+              <p class="kicker">Preço</p>
+              <h2 id="preco-title">Nubi completo</h2>
+              <p class="price-from" data-price-from></p>
+              <p class="price-value"><span data-price>R$ 47</span></p>
+              <p class="price-once">pagamento único · sem mensalidade</p>
+              <a class="btn btn-primary btn-lg btn-block" data-buy href="#preco">
+                Comprar agora
+                <svg class="i" aria-hidden="true"><use href="icons.svg#arrow-right" /></svg>
+              </a>
+              <p class="price-sub">
+                <svg class="i" aria-hidden="true"><use href="icons.svg#shield-check" /></svg>
+                Pagamento seguro pela Cakto
+              </p>
+            </div>
+            <div class="price-list">
+              <h3>O que está incluso</h3>
+              <ul class="ticks">
+                <li><svg class="i" aria-hidden="true"><use href="icons.svg#check" /></svg><span>Lembretes, alarmes e timers, com notificação e aviso em voz alta</span></li>
+                <li><svg class="i" aria-hidden="true"><use href="icons.svg#check" /></svg><span>Tarefas, notas e memória</span></li>
+                <li><svg class="i" aria-hidden="true"><use href="icons.svg#check" /></svg><span>Abrir sites e apps, pesquisar no Google e no YouTube</span></li>
+                <li><svg class="i" aria-hidden="true"><use href="icons.svg#check" /></svg><span>Conversa com IA grátis (opcional), instalada com um botão</span></li>
+                <li><svg class="i" aria-hidden="true"><use href="icons.svg#check" /></svg><span>Uso pelo celular com QR Code e lembretes no celular (app ntfy)</span></li>
+                <li><svg class="i" aria-hidden="true"><use href="icons.svg#check" /></svg><span>Cores e acessórios para o Telinha, tema claro e escuro, vozes</span></li>
+                <li><svg class="i" aria-hidden="true"><use href="icons.svg#check" /></svg><span>Instalador e versão portátil</span></li>
+                <li><svg class="i" aria-hidden="true"><use href="icons.svg#check" /></svg><span>Todas as atualizações incluídas</span></li>
+              </ul>
+              <p class="price-req">
+                <svg class="i" aria-hidden="true"><use href="icons.svg#monitor" /></svg>
+                Requer Windows 10 ou 11, 64 bits.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DÚVIDAS ============ -->
+      <section class="section" id="duvidas" aria-labelledby="faq-title">
+        <div class="wrap faq-wrap">
+          <header class="section-head">
+            <p class="kicker">Dúvidas</p>
+            <h2 id="faq-title">Perguntas frequentes</h2>
+          </header>
+          <div class="faq">
+            <details>
+              <summary>Tem mensalidade?<svg class="i" aria-hidden="true"><use href="icons.svg#chevron-down" /></svg></summary>
+              <p>Não. Você paga uma vez e o Nubi é seu, com as atualizações incluídas.</p>
+            </details>
+            <details>
+              <summary>Funciona no Mac ou no celular?<svg class="i" aria-hidden="true"><use href="icons.svg#chevron-down" /></svg></summary>
+              <p>
+                O Nubi é um app para Windows 10 e 11, 64 bits. Não tem versão para Mac. No celular, você usa pela página
+                que abre com o QR Code, com o PC ligado e no mesmo Wi-Fi, e recebe os lembretes pelo app ntfy.
+              </p>
+            </details>
+            <details>
+              <summary>Precisa de internet?<svg class="i" aria-hidden="true"><use href="icons.svg#chevron-down" /></svg></summary>
+              <p>
+                Não para lembretes, timers, tarefas, notas e memória. A internet só entra para abrir sites, pesquisar,
+                buscar atualizações e, se você ligar, conversar com uma IA online ou mandar lembretes para o celular.
+              </p>
+            </details>
+            <details>
+              <summary>Preciso pagar pela IA?<svg class="i" aria-hidden="true"><use href="icons.svg#chevron-down" /></svg></summary>
+              <p>
+                Não. O jeito mais fácil é o botão <q>IA grátis no seu computador</q>: o Nubi instala o Ollama, gratuito,
+                sem cadastro e sem chave. Se preferir, use uma chave grátis do Groq, do Gemini ou do OpenRouter (o Nubi
+                ensina o passo a passo). Esses planos têm limite diário, e no modo automático o Nubi troca de IA sozinho.
+                E a IA é opcional.
+              </p>
+            </details>
+            <details>
+              <summary>Como recebo a chave de ativação?<svg class="i" aria-hidden="true"><use href="icons.svg#chevron-down" /></svg></summary>
+              <p>
+                Ela chega no e-mail usado na compra, junto com o link da página de download. Na primeira abertura, o Nubi
+                pede esse e-mail e a chave.
+              </p>
+            </details>
+            <details>
+              <summary>Posso usar em mais de um computador?<svg class="i" aria-hidden="true"><use href="icons.svg#chevron-down" /></svg></summary>
+              <p>A licença é pessoal. Você pode instalar nos seus próprios computadores usando a mesma chave.</p>
+            </details>
+            <details>
+              <summary><span>Apareceu <q>O Windows protegeu o computador</q>. É vírus?</span><svg class="i" aria-hidden="true"><use href="icons.svg#chevron-down" /></svg></summary>
+              <p>
+                Não. Esse aviso aparece para apps novos que o Windows ainda não conhece. Clique em
+                <strong>Mais informações</strong> e depois em <strong>Executar assim mesmo</strong>.
+              </p>
+            </details>
+            <details>
+              <summary>Como chegam as atualizações?<svg class="i" aria-hidden="true"><use href="icons.svg#chevron-down" /></svg></summary>
+              <p>Sozinhas. O Nubi avisa quando tem versão nova, e você não paga nada a mais por ela.</p>
+            </details>
+            <details>
+              <summary>Perdi minha chave. E agora?<svg class="i" aria-hidden="true"><use href="icons.svg#chevron-down" /></svg></summary>
+              <p>Procure no e-mail da compra. Se não achar, fale com o suporte: <span data-support></span>.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ CTA FINAL ============ -->
+      <section class="section final" aria-labelledby="final-title">
+        <div class="wrap final-in">
+          <img src="assets/robo/tela-piscando.svg" alt="" width="120" height="120" />
+          <h2 id="final-title">Deixe o Telinha lembrar por você</h2>
+          <p>Pagamento único de <span data-price>R$ 47</span>, com todas as atualizações incluídas.</p>
+          <a class="btn btn-primary btn-lg" data-buy href="#preco">
+            Quero o Nubi
+            <svg class="i" aria-hidden="true"><use href="icons.svg#arrow-right" /></svg>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer-in">
+        <div>
+          <a class="brand" href="#conteudo"><img src="assets/favicon.png" alt="" width="24" height="24" /><span>Nubi</span></a>
+          <p>O robozinho que organiza seu dia, no topo da tela do Windows.</p>
+          <nav class="footer-links" aria-label="Páginas">
+            <a href="novidades.html">Novidades</a>
+            <a href="privacidade.html">Privacidade</a>
+            <a href="termos.html">Termos de uso</a>
+            <a href="https://www.instagram.com/nubi.ia/" target="_blank" rel="noopener">Instagram @nubi.ia</a>
+          </nav>
+        </div>
+        <div>
+          <h2 class="footer-h">Suporte</h2>
+          <p class="support-line"><svg class="i" aria-hidden="true"><use href="icons.svg#mail" /></svg><span data-support></span></p>
+        </div>
+        <div>
+          <h2 class="footer-h">Software livre</h2>
+          <p>
+            Feito com <a href="https://www.electronjs.org/" rel="noopener">Electron</a> e
+            <a href="https://react.dev/" rel="noopener">React</a> (licença MIT). Ícones do
+            <a href="https://lucide.dev/" rel="noopener">Lucide</a> (licença ISC).
+          </p>
+        </div>
+      </div>
+      <div class="wrap footer-bottom">
+        <p>© <span id="year">2026</span> Nubi. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <div class="buybar" id="buybar">
+      <div>
+        <strong data-price>R$ 47</strong>
+        <span>pagamento único</span>
+      </div>
+      <a class="btn btn-primary btn-sm" data-buy href="#preco">Comprar</a>
+    </div>
+
+    <script src="site.js"></script>
+  </body>
+</html>

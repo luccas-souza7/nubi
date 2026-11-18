@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /obrigado.html
+
+Sitemap: https://luccas-souza7.github.io/nubi/sitemap.xml

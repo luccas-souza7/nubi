@@ -1,0 +1,41 @@
+/* Estilo das páginas de texto (novidades, privacidade, termos). */
+:root {
+  --bg: #0b0c11;
+  --card: #15161f;
+  --line: #2a2c3c;
+  --text: #f2f2f7;
+  --muted: #a3a5b8;
+  --accent: #5cd6ff;
+  --ok: #4df2b0;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); }
+body { font: 16px/1.65 'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); }
+.top { border-bottom: 1px solid var(--line); }
+.top .in, main, footer .in { max-width: 820px; margin: 0 auto; padding: 0 16px; }
+.top .in { display: flex; align-items: center; gap: 10px; height: 60px; }
+.brand { display: flex; align-items: center; gap: 8px; color: var(--text); text-decoration: none; font-weight: 900; font-size: 20px; }
+.brand img { width: 30px; height: 30px; }
+.top nav { margin-left: auto; display: flex; gap: 16px; font-size: 14px; font-weight: 700; }
+.top nav a { color: var(--muted); text-decoration: none; }
+.top nav a:hover, .top nav a[aria-current] { color: var(--text); }
+main { padding-top: 36px; padding-bottom: 56px; }
+h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.15; margin: 0 0 8px; font-weight: 900; }
+h2 { font-size: 21px; margin: 34px 0 8px; }
+h3 { font-size: 17px; margin: 22px 0 6px; }
+.muted { color: var(--muted); }
+.note { background: rgba(255, 216, 77, 0.08); border: 1px solid rgba(255, 216, 77, 0.3); border-radius: 12px; padding: 12px 16px; font-size: 14px; margin: 18px 0; }
+ul, ol { padding-left: 22px; }
+li { margin: 4px 0; }
+.release { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; margin: 14px 0; }
+.release header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; }
+.release h2 { margin: 0; }
+.release .date { color: var(--muted); font-size: 14px; }
+.release .badge { font-size: 12px; font-weight: 800; color: var(--ok); border: 1px solid rgba(77, 242, 176, 0.4); border-radius: 999px; padding: 1px 8px; }
+.release .notes { white-space: pre-line; margin: 10px 0 0; }
+.btn { display: inline-block; background: var(--accent); color: #06121a; font-weight: 800; text-decoration: none; border-radius: 12px; padding: 10px 16px; margin-top: 12px; }
+footer { border-top: 1px solid var(--line); padding: 24px 0 40px; color: var(--muted); font-size: 14px; }
+footer .in { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+@media (max-width: 560px) { .top nav { gap: 12px; font-size: 13px; } .brand span { display: none; } }

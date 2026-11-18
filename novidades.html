@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Novidades · Nubi</title>
+    <meta name="description" content="O que mudou em cada versão do Nubi." />
+    <link rel="canonical" href="https://luccas-souza7.github.io/nubi/novidades.html" />
+    <meta name="theme-color" content="#0a0e1c" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Nubi" />
+    <meta property="og:url" content="https://luccas-souza7.github.io/nubi/novidades.html" />
+    <meta property="og:title" content="Novidades · Nubi" />
+    <meta property="og:description" content="O que mudou em cada versão do Nubi." />
+    <meta property="og:image" content="https://luccas-souza7.github.io/nubi/assets/icone.png" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="paginas.css" />
+    <script src="config.js"></script>
+  </head>
+  <body>
+    <header class="top">
+      <div class="in">
+        <a class="brand" href="./"><img src="assets/favicon.png" alt="" /><span>Nubi</span></a>
+        <nav><a href="novidades.html" aria-current="page">Novidades</a><a href="privacidade.html">Privacidade</a><a href="termos.html">Termos</a></nav>
+      </div>
+    </header>
+    <main>
+      <h1>Novidades do Nubi</h1>
+      <p class="muted">O que mudou em cada versão. Quem usa o instalador recebe as atualizações sozinho; na versão portátil, o Nubi avisa e mostra o link.</p>
+      <div id="list"><p class="muted">Carregando…</p></div>
+    </main>
+    <footer><div class="in"><span>Nubi · ícones <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a> (licença ISC)</span><a href="privacidade.html">Política de privacidade</a><a href="termos.html">Termos de uso</a></div></footer>
+    <script>
+      ;(function () {
+        var cfg = window.NUBI_CONFIG || {}
+        var repo = cfg.repoReleases || 'luccas-souza7/nubi'
+        var list = document.getElementById('list')
+        function el(tag, cls, text) {
+          var e = document.createElement(tag)
+          if (cls) e.className = cls
+          if (text != null) e.textContent = text
+          return e
+        }
+        // As notas vêm em Markdown simples: mostramos como texto, nunca como HTML.
+        // Apaga qualquer código (HTML) que venha nas notas: o cliente só vê texto.
+        function clean(md) {
+          return String(md || '')
+            .replace(/\r/g, '')
+            .replace(/<[^>]*>?/g, '')
+            .replace(/&(amp|lt|gt|quot|#39|nbsp);/g, function (_, e) {
+              return { amp: '&', lt: '', gt: '', quot: '"', '#39': "'", nbsp: ' ' }[e]
+            })
+            .replace(/^\s*[-*]\s+/gm, '• ')
+            .replace(/\*\*(.+?)\*\*/g, '$1')
+            .replace(/^#+\s*/gm, '')
+            .split('\n')
+            .map(function (l) { return l.trim() })
+            .filter(function (l, i, all) { return l || (i > 0 && all[i - 1]) })
+            .join('\n')
+            .trim()
+        }
+        fetch('https://api.github.com/repos/' + repo + '/releases?per_page=20', { headers: { Accept: 'application/vnd.github+json' } })
+          .then(function (r) {
+            if (!r.ok) throw new Error(r.status)
+            return r.json()
+          })
+          .then(function (releases) {
+            releases = releases.filter(function (r) { return !r.draft && !r.prerelease })
+            list.innerHTML = ''
+            if (!releases.length) {
+              list.appendChild(el('p', 'muted', 'Ainda não há versões publicadas.'))
+              return
+            }
+            releases.forEach(function (r, i) {
+              var box = el('article', 'release')
+              var head = el('header')
+              head.appendChild(el('h2', null, 'Versão ' + String(r.tag_name || r.name).replace(/^v/, '')))
+              if (i === 0) head.appendChild(el('span', 'badge', 'mais recente'))
+              head.appendChild(el('span', 'date', new Date(r.published_at).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' })))
+              box.appendChild(head)
+              box.appendChild(el('p', 'notes', clean(r.body) || 'Melhorias e correções.'))
+              if (i === 0) {
+                var a = el('a', 'btn', 'Baixar a versão portátil mais nova')
+                a.href = 'https://github.com/' + repo + '/releases/latest/download/Nubi-Portable.exe'
+                box.appendChild(a)
+              }
+              list.appendChild(box)
+            })
+          })
+          .catch(function () {
+            list.innerHTML = ''
+            list.appendChild(el('p', 'muted', 'Não consegui carregar as novidades agora. Tente de novo daqui a pouco.'))
+          })
+      })()
+    </script>
+  </body>
+</html>

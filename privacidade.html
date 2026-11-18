@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Política de privacidade · Nubi</title>
+    <meta name="description" content="Como o Nubi trata os seus dados." />
+    <link rel="canonical" href="https://luccas-souza7.github.io/nubi/privacidade.html" />
+    <meta name="theme-color" content="#0a0e1c" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Nubi" />
+    <meta property="og:url" content="https://luccas-souza7.github.io/nubi/privacidade.html" />
+    <meta property="og:title" content="Política de privacidade · Nubi" />
+    <meta property="og:description" content="Como o Nubi trata os seus dados." />
+    <meta property="og:image" content="https://luccas-souza7.github.io/nubi/assets/icone.png" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="paginas.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="in">
+        <a class="brand" href="./"><img src="assets/favicon.png" alt="" /><span>Nubi</span></a>
+        <nav><a href="novidades.html">Novidades</a><a href="privacidade.html" aria-current="page">Privacidade</a><a href="termos.html">Termos</a></nav>
+      </div>
+    </header>
+    <main>
+      <!-- PREENCHER antes de publicar: troque os campos entre colchetes e peça para um advogado revisar. -->
+      <h1>Política de privacidade</h1>
+      <p class="muted">Última atualização: [DATA]</p>
+
+      <p>
+        Esta política explica como o <strong>Nubi</strong>, assistente para Windows, trata os seus dados pessoais, de acordo
+        com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018, "LGPD").
+      </p>
+      <p>
+        O responsável (controlador) é <strong>[NOME COMPLETO OU RAZÃO SOCIAL]</strong>, inscrito no [CPF/CNPJ] sob o nº
+        [NÚMERO], contato: <a href="mailto:[E-MAIL DE CONTATO]">[E-MAIL DE CONTATO]</a>.
+      </p>
+
+      <h2>Resumo</h2>
+      <ul>
+        <li>O Nubi <strong>não tem conta nem login</strong> e <strong>não tem servidor próprio</strong> que guarde as suas coisas.</li>
+        <li>Lembretes, tarefas, notas, memória, conversas e ajustes ficam <strong>só no seu computador</strong>.</li>
+        <li>O Nubi <strong>não usa rastreamento, propaganda nem ferramentas de análise</strong>.</li>
+        <li>Alguns recursos opcionais usam serviços de terceiros. Isso só acontece se você ligar o recurso (veja abaixo).</li>
+      </ul>
+
+      <h2>1. Dados que ficam no seu computador</h2>
+      <p>
+        Ficam num arquivo dentro da pasta do Nubi no seu Windows (<code>%APPDATA%\Nubi</code>): seu nome (se você
+        informar), lembretes, alarmes, timers, tarefas, notas, o que você pede para o Nubi lembrar, as últimas mensagens
+        da conversa, os ajustes, as chaves de IA que você colar e a sua chave de ativação com o e-mail da compra.
+      </p>
+      <p>
+        Nós não temos acesso a esse arquivo. Você pode abrir a pasta, fazer backup ou apagar tudo a qualquer momento
+        (Ajustes → Seus dados). Desinstalar o Nubi não apaga esse arquivo automaticamente; para apagar, exclua a pasta.
+      </p>
+
+      <h2>2. Compra e ativação</h2>
+      <p>
+        O pagamento é processado pela plataforma <strong>Cakto</strong>, que recebe os dados necessários para a compra
+        (como nome, e-mail, CPF e dados de pagamento), conforme a política de privacidade dela. Nós recebemos da Cakto o
+        seu nome, e-mail e dados da compra, usados para enviar a chave de ativação, prestar suporte e cumprir obrigações
+        legais e fiscais.
+      </p>
+      <p>
+        A chave de ativação é conferida <strong>no próprio computador</strong>, sem enviar nada para nós.
+      </p>
+
+      <h2>3. Recursos opcionais que usam terceiros</h2>
+      <h3>Conversa com inteligência artificial</h3>
+      <p>
+        Se você ligar a IA, as mensagens que você escreve para conversar (junto com o seu nome e o que pediu para o Nubi
+        lembrar, para a resposta fazer sentido) são enviadas <strong>diretamente do seu computador</strong> ao provedor que
+        você escolheu, usando a <strong>sua própria chave</strong>: Groq, Google (Gemini), OpenRouter, Anthropic (Claude)
+        ou OpenAI. Cada um trata esses dados conforme a política dele. No plano gratuito de alguns provedores (por
+        exemplo, o Gemini), as conversas podem ser usadas para melhorar os produtos deles. Com o <strong>Ollama</strong>, a
+        IA roda no seu computador e nada sai dele. Lembretes, tarefas e notas não são enviados à IA.
+      </p>
+      <h3>Lembretes no celular (ntfy)</h3>
+      <p>
+        Se você ligar "Receber os lembretes no celular", o texto de cada lembrete que vencer é enviado ao serviço de
+        notificações <strong>ntfy</strong> (hoje o servidor público ntfy.sh; podemos trocá-lo por outro servidor no futuro),
+        que entrega a notificação ao seu celular. Qualquer pessoa que souber o nome do seu
+        tópico consegue ler esses avisos, por isso ele é gerado aleatoriamente e você pode trocá-lo. Você também pode
+        escolher receber só "Você tem um lembrete", sem o texto.
+      </p>
+      <h3>Usar pelo celular no mesmo Wi-Fi</h3>
+      <p>
+        Esse recurso funciona <strong>só dentro da sua rede local</strong>: o celular conversa direto com o seu computador,
+        protegido por um código secreto que vai no QR Code. Nada passa pela internet.
+      </p>
+      <h3>Atualizações e downloads</h3>
+      <p>
+        O Nubi verifica e baixa atualizações no <strong>GitHub</strong> (Microsoft), que, como qualquer site, registra o
+        endereço IP de quem acessa. A página de novidades também consulta o GitHub.
+      </p>
+      <h3>Abrir sites e pesquisar</h3>
+      <p>Quando você pede para abrir um site ou pesquisar, o Nubi só abre o seu navegador. A partir daí vale a política do site visitado.</p>
+
+      <h2>4. Para que usamos os dados e com qual base legal</h2>
+      <ul>
+        <li><strong>Venda, ativação e suporte</strong>: execução do contrato (LGPD, art. 7º, V).</li>
+        <li><strong>Obrigações fiscais e legais</strong>: cumprimento de obrigação legal (art. 7º, II).</li>
+        <li><strong>Recursos opcionais com terceiros</strong>: a seu pedido, ao ligar o recurso, para executar o serviço (art. 7º, V).</li>
+      </ul>
+      <p>Não vendemos nem compartilhamos seus dados para publicidade.</p>
+
+      <h2>5. Por quanto tempo</h2>
+      <p>
+        Os dados no seu computador ficam lá até você apagar. Os dados da compra (nome, e-mail, comprovante) são guardados
+        pelo tempo exigido pela legislação fiscal e para eventual defesa em processos.
+      </p>
+
+      <h2>6. Seus direitos</h2>
+      <p>
+        Você pode pedir, a qualquer momento: confirmação e acesso aos dados, correção, anonimização ou eliminação,
+        portabilidade, informação sobre compartilhamento e revogação do consentimento (LGPD, art. 18). Basta escrever
+        para <a href="mailto:[E-MAIL DE CONTATO]">[E-MAIL DE CONTATO]</a>. Você também pode reclamar à Autoridade Nacional de
+        Proteção de Dados (ANPD).
+      </p>
+
+      <h2>7. Segurança</h2>
+      <p>
+        A chave de ativação é assinada digitalmente, o acesso pelo celular exige código secreto e o Nubi não guarda seus
+        dados em servidores. Mesmo assim, proteja o seu computador com senha e antivírus, porque é nele que os dados ficam.
+      </p>
+
+      <h2>8. Crianças</h2>
+      <p>O Nubi não é direcionado a menores de 13 anos.</p>
+
+      <h2>9. Mudanças nesta política</h2>
+      <p>Quando esta política mudar, a data no topo será atualizada e, se a mudança for importante, avisaremos nas novidades do app.</p>
+    </main>
+    <footer><div class="in"><span>Nubi · ícones <a href="https://lucide.dev" target="_blank" rel="noopener">Lucide</a> (licença ISC)</span><a href="termos.html">Termos de uso</a><a href="novidades.html">Novidades</a></div></footer>
+  </body>
+</html>

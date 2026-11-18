@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#0a0e1c" />
+    <title>Obrigado! · Nubi</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Nunito:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="config.js"></script>
+  </head>
+  <body>
+    <main class="thanks-page">
+      <div class="thanks">
+        <div class="thanks-head">
+          <img src="assets/robo/tela-animado.svg" alt="" width="132" height="132" />
+          <h1>Compra confirmada!</h1>
+          <p class="muted">O Nubi agora é seu, com todas as atualizações incluídas. Baixe aqui:</p>
+        </div>
+
+        <div class="stack">
+          <a class="btn btn-primary btn-lg btn-block" data-download="Nubi-Setup.exe" href="#">
+            <svg class="i" aria-hidden="true"><use href="icons.svg#download" /></svg>
+            Baixar instalador (recomendado)
+          </a>
+          <a class="btn btn-ghost btn-block" data-download="Nubi-Portable.exe" href="#">
+            <svg class="i" aria-hidden="true"><use href="icons.svg#package" /></svg>
+            Versão portátil (sem instalar)
+          </a>
+        </div>
+
+        <h2><svg class="i" aria-hidden="true"><use href="icons.svg#key-round" /></svg>Sua chave de ativação</h2>
+        <div id="key-ready" hidden>
+          <p class="muted small">Na primeira abertura, o Nubi pede o e-mail da compra e esta chave. Copie e cole lá:</p>
+          <div class="key-box" id="key"></div>
+          <p class="muted small" id="key-email"></p>
+          <button class="btn btn-ghost btn-block" id="copy" type="button">
+            <svg class="i" aria-hidden="true"><use href="icons.svg#copy" /></svg>
+            <span id="copy-label">Copiar chave</span>
+          </button>
+        </div>
+        <div id="key-wait" class="key-wait">
+          <svg class="i" aria-hidden="true"><use href="icons.svg#mail" /></svg>
+          <p style="margin: 0">
+            Sua chave chega no <strong>e-mail usado na compra</strong>, junto com um link para esta página. Enquanto isso,
+            já pode baixar e instalar: o Nubi pede a chave só na primeira abertura.
+          </p>
+        </div>
+
+        <div class="tips">
+          <p>
+            <svg class="i" aria-hidden="true"><use href="icons.svg#monitor" /></svg>
+            <span><strong>Windows 10 e 11, 64 bits.</strong></span>
+          </p>
+          <p class="warn">
+            <svg class="i" aria-hidden="true"><use href="icons.svg#triangle-alert" /></svg>
+            <span>
+              Se aparecer "O Windows protegeu o computador", clique em
+              <strong>Mais informações → Executar assim mesmo</strong>. Isso é normal em apps novos.
+            </span>
+          </p>
+          <p>
+            <svg class="i" aria-hidden="true"><use href="icons.svg#mouse-pointer-click" /></svg>
+            <span>
+              Depois de abrir, passe o mouse no topo da tela: o Nubi está ali. Nos Ajustes você escolhe o visual do robô e
+              liga a IA grátis.
+            </span>
+          </p>
+          <p>
+            <svg class="i" aria-hidden="true"><use href="icons.svg#refresh-cw" /></svg>
+            <span>Guarde este link. As atualizações chegam sozinhas, o próprio Nubi avisa.</span>
+          </p>
+          <p>
+            <svg class="i" aria-hidden="true"><use href="icons.svg#circle-help" /></svg>
+            <span>Dúvidas? <span data-support></span></span>
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      ;(function () {
+        var cfg = window.NUBI_CONFIG || {}
+        var repo = cfg.repoReleases || 'luccas-souza7/nubi'
+        document.querySelectorAll('[data-download]').forEach(function (a) {
+          a.href = 'https://github.com/' + repo + '/releases/latest/download/' + a.getAttribute('data-download')
+        })
+
+        document.querySelectorAll('[data-support]').forEach(function (el) {
+          var parts = []
+          if (cfg.emailSuporte) parts.push('<a href="mailto:' + cfg.emailSuporte + '">' + cfg.emailSuporte + '</a>')
+          if (cfg.whatsappSuporte)
+            parts.push('<a href="https://wa.me/' + cfg.whatsappSuporte + '" target="_blank" rel="noopener">WhatsApp</a>')
+          el.innerHTML = parts.join(' ou ')
+        })
+
+        // Link personalizado: obrigado.html?email=...&chave=NUBI-...
+        var params = new URLSearchParams(location.search)
+        var key = (params.get('chave') || '').trim()
+        var email = (params.get('email') || '').trim()
+        if (!/^NUBI-[0-9A-Z-]+$/i.test(key)) return
+
+        document.getElementById('key-wait').hidden = true
+        document.getElementById('key-ready').hidden = false
+        document.getElementById('key').textContent = key.toUpperCase()
+        if (email) document.getElementById('key-email').textContent = 'E-mail da compra: ' + email
+
+        var btn = document.getElementById('copy')
+        var label = document.getElementById('copy-label')
+        btn.addEventListener('click', function () {
+          var done = function () {
+            label.textContent = 'Chave copiada'
+            setTimeout(function () {
+              label.textContent = 'Copiar chave'
+            }, 2500)
+          }
+          if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(key.toUpperCase()).then(done, fallback)
+          } else fallback()
+          function fallback() {
+            var range = document.createRange()
+            range.selectNodeContents(document.getElementById('key'))
+            var sel = window.getSelection()
+            sel.removeAllRanges()
+            sel.addRange(range)
+            try {
+              document.execCommand('copy')
+              done()
+            } catch (e) {
+              label.textContent = 'Selecionei a chave: aperte Ctrl+C'
+            }
+          }
+        })
+      })()
+    </script>
+  </body>
+</html>
